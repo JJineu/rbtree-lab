@@ -21,6 +21,7 @@ void test_init(void) {
 void test_insert_single(const key_t key) {
   rbtree *t = new_rbtree();
   node_t *p = rbtree_insert(t, key);
+  // printf("%d\n", p->key);
   assert(p != NULL);
   assert(t->root == p);
   assert(p->key == key);
@@ -105,6 +106,7 @@ void test_minmax(key_t *arr, const size_t n) {
 
   qsort((void *)arr, n, sizeof(key_t), comp);
   node_t *p = rbtree_min(t);
+  // printf("%d %d\n", p->key, arr[0]);
   assert(p != NULL);
   assert(p->key == arr[0]);
 
@@ -368,9 +370,12 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 }
 
 int main(void) {
-  test_init();
-  test_insert_single(1024);
-  test_find_single(512, 1024);
+  
+  // init, insert, find, min, max 통과
+
+  test_init();                 // 통과
+  test_insert_single(1024);    // 통과
+  test_find_single(512, 1024); // 통과
   test_erase_root(128);
   test_find_erase_fixed();
   test_minmax_suite();
